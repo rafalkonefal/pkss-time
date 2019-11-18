@@ -58,7 +58,7 @@ void Service::handlePut(http_request message) {
             put_start["startTime"] = json::value::string(startTime);
             for (auto a : module_address){
                 string path = a + "/start";
-                web::http::client::http_client client("path");
+                web::http::client::http_client client(path);
                 client.request(web::http::methods::PUT, U("/"), put_start).then([](const web::http::http_response& response) {
                     return response.extract_json();
                 })
@@ -98,7 +98,7 @@ void Service::handleGet(http_request message) {
             json::value actual_data;
             actual_data["speed"] = json::value::number(speed);
             actual_data["speed_to_set"] = json::value::number(speed_to_set);
-            actual_data["startime"] = json::value::string(startTime);
+            actual_data["startTime"] = json::value::string(startTime);
             actual_data["symTime"] = json::value::string(symTime);
             actual_data["sim_start"] = json::value::number(sim_start);
             message.reply(status_codes::OK,actual_data);
@@ -152,7 +152,7 @@ void Service::send_time_info(int step){
     put_time["symTime"] = json::value::string(symTime);
     for (auto a : module_address){
         string path = a + "/time";
-        web::http::client::http_client client("path");
+        web::http::client::http_client client(path);
         client.request(web::http::methods::PUT, U("/"), put_time).then([](const web::http::http_response& response) {
             return response.extract_json();
         })

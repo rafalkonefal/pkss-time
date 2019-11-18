@@ -6,8 +6,8 @@ int main()
 {
     int i=1;
     std::vector<string> add;
-    /*Adresy modułów
-    add.push_back("lalal");*/
+    // TODO -> add module addresses
+    //add.push_back("http://127.0.0.1:8080/time");
     Service serv("127.0.0.1","8080",add);
     serv.setEndpoint("/time");
     serv.accept().wait();
